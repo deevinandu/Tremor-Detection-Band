@@ -7,6 +7,9 @@ import { Separator } from '@/components/ui/separator';
 import { toast } from '@/components/ui/sonner';
 import { ArrowRight, ThermometerSun, CircleArrowDown, Bell } from 'lucide-react';
 
+// Define base GSR level
+const BASE_GSR_LEVEL = 995;
+
 const RealTimeDashboard: React.FC = () => {
   const [data, setData] = useState<TremorData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -131,7 +134,7 @@ const RealTimeDashboard: React.FC = () => {
           {/* Biometrics card */}
           <Card className="p-6 md:col-span-2">
             <h3 className="text-xl font-semibold mb-4">Biometric Data</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex items-center">
                 <div className="bg-red-100 p-3 rounded-full mr-4">
                   <ThermometerSun className="h-8 w-8 text-red-500" />
@@ -141,6 +144,7 @@ const RealTimeDashboard: React.FC = () => {
                   <p className="text-2xl font-bold">{data.avg_bpm} <span className="text-sm font-normal">BPM</span></p>
                 </div>
               </div>
+              
               <div className="flex items-center">
                 <div className="bg-blue-100 p-3 rounded-full mr-4">
                   <ArrowRight className="h-8 w-8 text-blue-500" />
@@ -148,6 +152,16 @@ const RealTimeDashboard: React.FC = () => {
                 <div>
                   <p className="text-sm text-gray-500">GSR</p>
                   <p className="text-2xl font-bold">{data.gsr} <span className="text-sm font-normal">units</span></p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="bg-green-100 p-3 rounded-full mr-4">
+                  <ArrowRight className="h-8 w-8 text-green-500" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Base GSR</p>
+                  <p className="text-2xl font-bold">{BASE_GSR_LEVEL} <span className="text-sm font-normal">units</span></p>
                 </div>
               </div>
             </div>

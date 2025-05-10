@@ -84,8 +84,8 @@ const HistoricalDashboard: React.FC = () => {
     ? Math.round(data.reduce((sum, item) => sum + item.avg_bpm, 0) / data.length) 
     : 0;
 
-  // Filter only tremor events for the event log
-  const tremorEventsList = data.filter(item => item.is_tremor);
+  // Filter only tremor events for the event log and limit to 25 entries
+  const tremorEventsList = data.filter(item => item.is_tremor).slice(0, 25);
 
   return (
     <div className="space-y-6">
@@ -128,10 +128,10 @@ const HistoricalDashboard: React.FC = () => {
             </Card>
           </div>
 
-          {/* Motion parameters chart */}
+          {/* Motion parameters chart - Adjust height based on data points */}
           <Card className="p-6">
             <h3 className="text-xl font-semibold mb-4">Motion Parameters Over Time</h3>
-            <div className="h-80">
+            <div className={`h-${Math.min(Math.max(chartData.length * 2, 64), 96)}`}>
               <ChartContainer config={{ primary: {}, accel: {}, gyro: {}, intensity: {} }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <ComposedChart data={chartData}>
@@ -194,10 +194,10 @@ const HistoricalDashboard: React.FC = () => {
             </div>
           </Card>
 
-          {/* Biometrics chart */}
+          {/* Biometrics chart - Adjust height based on data points */}
           <Card className="p-6">
             <h3 className="text-xl font-semibold mb-4">Physiological Parameters</h3>
-            <div className="h-72">
+            <div className={`h-${Math.min(Math.max(chartData.length * 1.8, 60), 80)}`}>
               <ChartContainer config={{ primary: {}, gsr: {}, bpm: {} }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData}>
@@ -236,9 +236,9 @@ const HistoricalDashboard: React.FC = () => {
             </div>
           </Card>
 
-          {/* Tremor event log */}
+          {/* Tremor event log - Limited to 25 entries */}
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Tremor Event Log</h3>
+            <h3 className="text-xl font-semibold mb-4">Tremor Event Log (Latest 25)</h3>
             {tremorEventsList.length > 0 ? (
               <div className="overflow-x-auto">
                 <Table>
