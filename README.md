@@ -1,4 +1,4 @@
-#Tremor Detection Band
+# Tremor Detection Band Dashboard
 
 A wearable device to detect and monitor tremors for medical applications.
 
