@@ -15,6 +15,10 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Included Files
+- **Sensor Code**: `sensor_data.ino` contains the ESP32 code for collecting sensor data.
+- **Schematic**: `ipd.kicad_sch` provides the kicad schematic for the hardware setup.
+
 ## Installation
 Follow these steps to set up the project locally:
 
